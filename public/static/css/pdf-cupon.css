@@ -1,0 +1,70 @@
+@page {
+    size: A4;
+    margin-left: 1cm;
+    margin-right: 1.5cm;
+    margin-top: 1.5cm;
+    margin-bottom: 2cm;
+
+}
+
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 100%;
+}
+
+.container {
+    padding-top: 20px;
+}
+
+.table td, .table th{
+    padding: .05rem;
+}
+
+hr {
+    margin-top: 0.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    text-align: center;
+    font-size: 9px;
+}
+
+td, th{
+    font-size: 9px;
+}
+
+table {
+    width: 100%;
+}
+
+.img-td {
+    width: 50px !important;
+    text-align: center;
+}
+
+#img-header {
+    background: url('../images/logo-reciclads.png');
+    /*background-size: ;
+    content: "";
+    width: ;
+    height: ;
+    margin-left: ;*/
+}
+
+.head-text {
+    font-size: 12px;
+}
+
+.titulo {
+    font-size: 11px;
+}
+
+.small-text{
+    font-size: 7px;
+}

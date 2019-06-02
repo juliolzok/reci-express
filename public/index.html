@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Reciclads</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="Reciclads" />
+    <link rel="icon" type="image/png" href="./static/images/icons/favicon.png" />
+    <meta name="keywords" content="reciclads, recycle, bottles, reciclado, botellas, catamarca, next innovation lab" />
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./static/css/jquery.fullPage.css" type="text/css" />
+    <link rel="stylesheet" href="./static/css/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./static/css/util.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./static/fonts/font-awesome-4.7.0/css/font-awesome.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="./static/js/Keyboard-master/css/keyboard.css" type="text/css" media="screen" />
+    
+  
+</head>
+
+<body style="background-color: #024995;">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-trans">
+        <a class="navbar-brand" href="#">
+            <img src="./static/images/logo-reciclads.png" id="navbar_logo" width="80" height="30" class="d-inline-block align-top">
+        </a>
+    </nav>
+
+    <div id="fullpage">
+        <div class="section" data-anchor="page1">
+
+            <!-- Seccion 1 -->
+            <div class="slide green" data-anchor="slide1">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-2">
+                        <h2>¡Bienvenido!</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <img src="./static/images/logo-reciclads.png" width="100%">
+                    </div>
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+                <div class="row justify-content-center">
+            
+                    <div class="col-md-3">
+                         <a class="btn btn-lg btn-block btn-success text-white"  id="xy" href="#page1/slide2">Comencemos a reciclar!</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seccion 2 -->
+            <div class="slide green" data-anchor="slide2">
+                <div class="row mt-4 ml-5 justify-content-center">
+                    <h1 style="font-family:'Nilland';">Ahora a insertar las botellas!</h1>
+                </div>
+            
+                <div class="row mt-4 ml-5 justify-content-center">
+                    <h3 style="font-family:'Nilland';">Por favor inserte sus botellas por abajo de la máquina. Una vez que termine,
+                        presione continuar.</h3>
+                </div>
+            
+                <div class="row justify-content-center mt-5 mb-5">
+                    <div class="col-md-2">
+                        <img class="img-fluid" src="./static/images/boy-reciclads.png" width="90%">
+                    </div>
+                    <div class="col-md-3 mt-5 justify-content-center">
+                        <h3 style="font-family: 'Nilland';">Contador de Botellas</h3>
+                        <div class="row mt-5">
+                            <div class="col-md-6">
+                                <!-- <a id="incrementar"><i class="fa fa-arrow-up" style="font-size: 10em;"></i></a>                                  </button><br><br>
+                                <a id="decrementar"><i class="fa fa-arrow-down" style="font-size: 10em;"></i></a>                             </button> -->
+                            </div>
+                            <div class="col-md-6">
+                                <h1 class="numero_botellas ml-5" id="botellas">0</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <a class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1">Atrás</a>
+                    </div>
+                    <div class="col-md-3">
+                        <form action="{% url 'maquina:maquina' %}" method="POST" enctype="multipart/form-data">
+                            <input type="text" id="input_botellas" name="botellas" value="0" hidden>
+                            <button class="btn btn-lg btn-block btn-success text-white" type="submit" onclick="verifyMethod()" id="submit_botellas">Continuar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seccion 3 -->
+            <div class="slide green mt-1 ml-4" data-anchor="slide3" id="slide_cupones">
+                <!-- Titulo -->
+                <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
+                    <h2 style="font-family:Nilland;">Ingrese a su aplicación y escanee el código!</h2>
+                </div>
+            
+                <!-- Información de Cupones -->
+                <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
+                    <div class="col-md-6">
+                        <img src="./static/images/iphonex.png" width="50%" style="margin-left:10rem;" />
+                    </div>
+                    <div class="col-md-6">
+                        <img src="./media/qrcode.png" width="50%"/>
+                    </div>
+                </div>
+            
+                <br><br>
+            
+                <!-- Botones -->
+                <!-- style="position:fixed;bottom:20px;left:3500px;" -->
+                <div class="row ml-5 justify-content-center">
+                    <div class="col-md-3">
+                        <a class="btn btn-lg btn-block btn-primary text-blue"  href="#page1/slide1">Listo</a>
+                    </div>
+                </div>
+            
+            </div>
+
+            <!-- Seccion 6 -->
+            <div class="slide green mt-3 ml-5" data-anchor="slide6"></div>
+        </div>
+    </div>
+
+    <!-- Modal Ayuda a usar Reciclads -->
+    <!-- {% include 'maquina/modals/modal_uso.html' %} -->
+
+    <!-- Modal Menos de 1 botella -->
+    <!-- {% include 'maquina/modals/modal_error_botellas.html' %} -->
+
+    <!-- Modal Error Tickets -->
+    <!-- {% include 'maquina/modals/modal_error_tickets.html' %} -->
+
+    <!-- The JavaScript -->
+    <script src="./static/js/jquery-3.3.1.min.js"></script>
+    <script src="./static/js/bootstrap.min.js"></script>
+    <script src="./static/js/jquery.fullPage.js"></script>
+    <script src="./static/js/socketio.js"></script>
+    
+    <!-- Script iniciador de fullpage -->
+    <script>
+        $('#fullpage').fullpage({
+            anchors: ['page1'],
+            controlArrows: false,
+        });
+    </script>
+
+    <!-- Script contador de Botellas -->
+    <script>
+        //document.getElementById("submit_botellas").disabled = true;
+        var contador_botellas = document.getElementById("botellas");
+        var input_botellas2 = document.getElementById("input_botellas");
+        var botellas = 0;
+        var socket = io.connect('http://localhost:8888');
+
+      const incrementar = () => {                                                                          // Si hace click en incrementar.
+            botellas++ ;                                                      // Incremento en 1 la cantidad de botellas.
+            contador_botellas.innerHTML = botellas;
+            // 
+            
+        }; 
+
+        
+        
+        // var button_incrementar = document.getElementById("incrementar");
+/*             input.addEventListener("keypress", function(event) {
+        event.preventDefault();
+            if (event.keyCode === 13) {
+                incrementar();
+            }   
+            }); */
+            socket.on('data', function(message) {
+                data = Number(message.data);
+                console.log(data);
+                if (data === 48) {
+                incrementar();
+            }   
+    });   
+               
+      
+
+        verifyMethod = function () {
+
+             if (parseInt(botellas) < 1) {
+                        $('#exampleModal2').modal('show');
+                        document.getElementById("submit_botellas").disabled = true;
+                    }
+                    else {
+                        input_botellas2.value = botellas;
+                     }
+        }
+       
+        // var button_decrementar = document.getElementById("decrementar");
+        // button_decrementar.onclick = function () {
+        //     if (parseInt(botellas) <= 1) {
+        //         $('#exampleModal2').modal('show');
+        //     }
+        //     else {
+        //         botellas -= 1;
+        //         contador_botellas.innerHTML = botellas;
+        //         input_botellas2.value = botellas;
+        //     }
+        // };
+    </script>
+
+    <script>
+        $('#exampleModal1').on('shown.bs.modal', function () {
+            $('#exampleModalLabel').focus()
+        })
+    </script>
+
+    <script>
+        $('.alert').alert()
+    </script>
+</body>
+
+</html>

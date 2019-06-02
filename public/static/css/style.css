@@ -1,0 +1,140 @@
+body {
+    background-color: #024995;
+    font-family: Nilland;
+}
+
+.card{
+    position:relative;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:
+    vertical;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:column;
+    -ms-flex-direction:column;
+    flex-direction:column;
+    background-color:#fff;
+    border:1px solid rgba(0,0,0,.125);
+    border-radius:.25rem
+}
+
+.card-img-top {
+    width: 100%;
+    height: 9vw;
+    object-fit: cover;
+}
+
+.card-selected {
+    position:relative;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex;
+    -webkit-box-orient:
+    vertical;
+    -webkit-box-direction:normal;
+    -webkit-flex-direction:column;
+    -ms-flex-direction:column;
+    flex-direction:column;
+    background-color:rgb(24, 193, 64);
+    border:1px solid rgba(0,0,0,.125);
+    border-radius:.25rem;
+    opacity: 0.7;
+}
+
+.green{
+    color:#f0fbfd;
+    background:#004a95 no-repeat top right;
+}
+
+.green ul li{
+    float:left;
+    padding:5px;
+    margin:5px;
+    color:#aaa;
+}
+
+.btn-round-lg{
+border-radius: 22.5px;
+}
+
+.btn-round{
+border-radius: 17px;
+}
+
+.btn-round-sm{
+border-radius: 15px;
+}
+
+.btn-round-xs{
+border-radius: 11px;
+padding-left: 10px;
+padding-right: 10px;
+}
+
+.btn-botellas-outline{
+    background: none;
+    padding: 20px 60px;
+    border: 2px solid #0099cc;
+    color: #0099cc;
+    border-radius: 70px;
+    font-size: 4em;
+}
+
+.btn-botellas-outline:hover, .btn-botellas-outline:focus, .btn-botellas-outline:active, .btn-botellas-outline.active, .open > .dropdown-toggle.btn-primary {
+	color: #33a6cc;
+	border-color: #33a6cc;
+}
+.btn-botellas-outline:active, .btn-botellas-outline.active {
+	border-color: #007299;
+	color: #007299;
+	box-shadow: none;
+}
+
+.numero_botellas{
+    font-size: 17em;
+}
+
+
+
+/* MODAL ARTESANAL CSS */
+
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

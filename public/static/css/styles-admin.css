@@ -1,0 +1,63 @@
+/* NECESARIO PARA INCLUIR BOOTSTRAP 4*/
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    height: 100%;
+    color: #8b9aa7;    
+    font-family: Arial, sans-serif;
+    background: #F8FAFC;
+}
+
+a:hover, span:hover {
+    text-decoration: none;
+}
+
+tbody {
+    background: rgb(255, 255, 255);
+}
+
+/* ################################## */
+
+#content {
+    min-height: 100%;
+}
+
+#footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+ }
+
+ #corp {
+float:right;
+}
+
+.module table {
+    border-collapse: separate;
+}
+
+.buttons-detail{
+    margin-bottom: 0px;
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.card-inverse{
+background-color: #333C47; 
+border-color: #333;
+}
+
+.content-detail{
+    color: #FFF;
+}
