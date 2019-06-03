@@ -83,10 +83,11 @@
                         <a class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1">Atrás</a>
                     </div>
                     <div class="col-md-3">
-                        <form action="{% url 'maquina:maquina' %}" method="POST" enctype="multipart/form-data">
+                        
+                        <!-- <form action="hashGen()"  method="GET" enctype="multipart/form-data"> -->
                             <input type="text" id="input_botellas" name="botellas" value="0" hidden>
-                            <button class="btn btn-lg btn-block btn-success text-white" type="submit" onclick="verifyMethod()" id="submit_botellas">Continuar</button>
-                        </form>
+                            <button class="btn btn-lg btn-block btn-success text-white"  type="submit" href="#page1/slide3"  onclick="verifyMethod()" id="submit_botellas">Continuar</button>
+                        <!-- </form> -->
                     </div>
                 </div>
             </div>
@@ -104,7 +105,7 @@
                         <img src="./static/images/iphonex.png" width="50%" style="margin-left:10rem;" />
                     </div>
                     <div class="col-md-6">
-                        <img src="./media/qrcode.png" width="50%"/>
+                        <div id="qrcode"></div> 
                     </div>
                 </div>
             
@@ -139,6 +140,8 @@
     <script src="./static/js/bootstrap.min.js"></script>
     <script src="./static/js/jquery.fullPage.js"></script>
     <script src="./static/js/socketio.js"></script>
+    <script src="./static/js/qrcode.js"></script>
+
     
     <!-- Script iniciador de fullpage -->
     <script>
@@ -152,15 +155,15 @@
     <script>
         //document.getElementById("submit_botellas").disabled = true;
         var contador_botellas = document.getElementById("botellas");
-        var input_botellas2 = document.getElementById("input_botellas");
+        var input_botellas = document.getElementById("input_botellas").value;
         var botellas = 0;
-        var socket = io.connect('http://localhost:8888');
+        var socket = io.connect('http://localhost:3000');
 
-      const incrementar = () => {                                                                          // Si hace click en incrementar.
+
+      const incrementar = function () {                                                                          // Si hace click en incrementar.
             botellas++ ;                                                      // Incremento en 1 la cantidad de botellas.
             contador_botellas.innerHTML = botellas;
-            // 
-            
+                        
         }; 
 
         
@@ -177,11 +180,10 @@
                 console.log(data);
                 if (data === 48) {
                 incrementar();
+                document.getElementById("submit_botellas").disabled = false;
             }   
     });   
                
-      
-
         verifyMethod = function () {
 
              if (parseInt(botellas) < 1) {
@@ -189,9 +191,15 @@
                         document.getElementById("submit_botellas").disabled = true;
                     }
                     else {
-                        input_botellas2.value = botellas;
+                        input_botellas = botellas;
+                        hashGen();
                      }
         }
+
+        const hashGen = function () {
+            console.log(input_botellas);
+            new QRCode(document.getElementById("qrcode"), "input");
+        } 
        
         // var button_decrementar = document.getElementById("decrementar");
         // button_decrementar.onclick = function () {

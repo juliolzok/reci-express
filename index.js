@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 const SerialPort = require('serialport');
-const io = require('socket.io');
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
+app.use(express.json());
 
-io.apply("connection", () => {
-  console.info(`Client connected`);
+server.listen(3000, function () {
+  console.log('listening on port 3000!');
 });
 
 app.get('/test', function (req, res) {
@@ -18,11 +20,15 @@ const sport = new SerialPort('COM4', () => {
   console.log('SerialPort Opened');
 });
 
-app.listen(3000, function () {
-  console.log('listening on port 3000!');
-});
+var connectedSocket = null;
+function onConnection(socket){
+    connectedSocket = socket;
+}
+io.on('connection', onConnection);
 
-
+server.on("connection", (socket) => {
+  console.log(`Client connected`);
+  });
 
 const parsers = SerialPort.parsers;
 const parser = new parsers.Readline({
@@ -34,8 +40,7 @@ sport.pipe(parser);
 parser.on('data', (data) => {
   console.log(data);
   i = i + 1;
-  io.emit('data',  i );
+  io.emit('data', { data: data });
   console.log(i);
-
   });
 
