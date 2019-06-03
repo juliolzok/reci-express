@@ -86,7 +86,7 @@
                         
                         <!-- <form action="hashGen()"  method="GET" enctype="multipart/form-data"> -->
                             <input type="text" id="input_botellas" name="botellas" value="0" hidden>
-                            <button class="btn btn-lg btn-block btn-success text-white"  type="submit" href="#page1/slide3"  onclick="verifyMethod()" id="submit_botellas">Continuar</button>
+                            <button class="btn btn-lg btn-block btn-success text-white"  type="submit" href="page1/slide3"  onclick="verifyMethod()" id="submit_botellas">Continuar</button>
                         <!-- </form> -->
                     </div>
                 </div>
@@ -115,7 +115,7 @@
                 <!-- style="position:fixed;bottom:20px;left:3500px;" -->
                 <div class="row ml-5 justify-content-center">
                     <div class="col-md-3">
-                        <a class="btn btn-lg btn-block btn-primary text-blue"  href="#page1/slide1">Listo</a>
+                        <button class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1" onclick="clearAll()"  >Listo</button>
                     </div>
                 </div>
             
@@ -141,6 +141,7 @@
     <script src="./static/js/jquery.fullPage.js"></script>
     <script src="./static/js/socketio.js"></script>
     <script src="./static/js/qrcode.js"></script>
+    <script src="./static/js/hashids.js"></script>
 
     
     <!-- Script iniciador de fullpage -->
@@ -158,6 +159,8 @@
         var input_botellas = document.getElementById("input_botellas").value;
         var botellas = 0;
         var socket = io.connect('http://localhost:3000');
+        var qrcode =  new QRCode("qrcode");
+        var hashids = new Hashids("cwejjwevfewiufghewoeofhweco");       
 
 
       const incrementar = function () {                                                                          // Si hace click en incrementar.
@@ -183,7 +186,7 @@
                 document.getElementById("submit_botellas").disabled = false;
             }   
     });   
-               
+        
         verifyMethod = function () {
 
              if (parseInt(botellas) < 1) {
@@ -192,14 +195,35 @@
                     }
                     else {
                         input_botellas = botellas;
-                        hashGen();
+                        codeGen();
+                        location.href='#page1/slide3';
                      }
         }
 
-        const hashGen = function () {
-            console.log(input_botellas);
-            new QRCode(document.getElementById("qrcode"), "input");
+        const codeGen =  () => {
+            var code = hashids.encode(botellas);
+            console.log(botellas);
+            console.log(code);
+            qrcode.makeCode(code);
         } 
+  /*       const hashGen = function () {
+            var code = hashids.encode();
+            console.log(code)
+            codeGen(code)
+            return code;
+        } */
+        const clearAll =  () => {
+            qrcode.clear();
+            input_botellas = 0;
+            botellas = 0;
+            contador_botellas.innerHTML = 0;
+            location.href='#page1/slide1';
+        }
+       
+        console.log(code);
+
+     
+
        
         // var button_decrementar = document.getElementById("decrementar");
         // button_decrementar.onclick = function () {
