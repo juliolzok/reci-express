@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="./static/css/util.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./static/fonts/font-awesome-4.7.0/css/font-awesome.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="./static/js/Keyboard-master/css/keyboard.css" type="text/css" media="screen" />
-    
-  
+
+
 </head>
 
 <body style="background-color: #024995;">
@@ -42,7 +42,7 @@
                 </div>
                 <br><br><br><br><br><br><br><br><br><br><br><br>
                 <div class="row justify-content-center">
-            
+
                     <div class="col-md-3">
                          <a class="btn btn-lg btn-block btn-success text-white"  id="xy" href="#page1/slide2">Comencemos a reciclar!</a>
                     </div>
@@ -54,12 +54,12 @@
                 <div class="row mt-4 ml-5 justify-content-center">
                     <h1 style="font-family:'Nilland';">Ahora a insertar las botellas!</h1>
                 </div>
-            
+
                 <div class="row mt-4 ml-5 justify-content-center">
                     <h3 style="font-family:'Nilland';">Por favor inserte sus botellas por abajo de la máquina. Una vez que termine,
                         presione continuar.</h3>
                 </div>
-            
+
                 <div class="row justify-content-center mt-5 mb-5">
                     <div class="col-md-2">
                         <img class="img-fluid" src="./static/images/boy-reciclads.png" width="90%">
@@ -77,13 +77,13 @@
                         </div>
                     </div>
                 </div>
-              
+
                 <div class="row justify-content-center">
                     <div class="col-md-3">
                         <a class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1">Atrás</a>
                     </div>
                     <div class="col-md-3">
-                        
+
                         <!-- <form action="hashGen()"  method="GET" enctype="multipart/form-data"> -->
                             <input type="text" id="input_botellas" name="botellas" value="0" hidden>
                             <button class="btn btn-lg btn-block btn-success text-white"  type="submit" href="page1/slide3"  onclick="verifyMethod()" id="submit_botellas">Continuar</button>
@@ -98,19 +98,19 @@
                 <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
                     <h2 style="font-family:Nilland;">Ingrese a su aplicación y escanee el código!</h2>
                 </div>
-            
+
                 <!-- Información de Cupones -->
                 <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
                     <div class="col-md-6">
                         <img src="./static/images/iphonex.png" width="50%" style="margin-left:10rem;" />
                     </div>
                     <div class="col-md-6">
-                        <div id="qrcode"></div> 
+                        <div id="qrcode"></div>
                     </div>
                 </div>
-            
+
                 <br><br>
-            
+
                 <!-- Botones -->
                 <!-- style="position:fixed;bottom:20px;left:3500px;" -->
                 <div class="row ml-5 justify-content-center">
@@ -118,7 +118,7 @@
                         <button class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1" onclick="clearAll()"  >Listo</button>
                     </div>
                 </div>
-            
+
             </div>
 
             <!-- Seccion 6 -->
@@ -143,7 +143,7 @@
     <script src="./static/js/qrcode.js"></script>
     <script src="./static/js/hashids.js"></script>
 
-    
+
     <!-- Script iniciador de fullpage -->
     <script>
         $('#fullpage').fullpage({
@@ -160,23 +160,34 @@
         var botellas = 0;
         var socket = io.connect('http://localhost:3000');
         var qrcode =  new QRCode("qrcode");
-        var hashids = new Hashids("cwejjwevfewiufghewoeofhweco");       
+        var hashids = new Hashids("cwejjwevfewiufghewoeofhweco");
+        var uuid = createUUID();
 
+        function createUUID() {
+            var s = [];
+            var intDigits = "0123456789";
+            for (var i = 0; i < 36; i++) {
+                s[i] = intDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+            s[19] = intDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+            return Number(s.join(""));
+        }
 
       const incrementar = function () {                                                                          // Si hace click en incrementar.
             botellas++ ;                                                      // Incremento en 1 la cantidad de botellas.
             contador_botellas.innerHTML = botellas;
-                        
-        }; 
 
-        
-        
+        };
+
+
+
         // var button_incrementar = document.getElementById("incrementar");
 /*             input.addEventListener("keypress", function(event) {
         event.preventDefault();
             if (event.keyCode === 13) {
                 incrementar();
-            }   
+            }
             }); */
             socket.on('data', function(message) {
                 data = Number(message.data);
@@ -184,9 +195,9 @@
                 if (data === 48) {
                 incrementar();
                 document.getElementById("submit_botellas").disabled = false;
-            }   
-    });   
-        
+            }
+    });
+
         verifyMethod = function () {
 
              if (parseInt(botellas) < 1) {
@@ -200,12 +211,14 @@
                      }
         }
 
+
+
         const codeGen =  () => {
-            var code = hashids.encode(botellas);
+            var code = hashids.encode(botellas, Date.now() , uuid, createUUID());
             console.log(botellas);
             console.log(code);
             qrcode.makeCode(code);
-        } 
+        }
   /*       const hashGen = function () {
             var code = hashids.encode();
             console.log(code)
@@ -219,12 +232,12 @@
             contador_botellas.innerHTML = 0;
             location.href='#page1/slide1';
         }
-       
+
         console.log(code);
 
-     
 
-       
+
+
         // var button_decrementar = document.getElementById("decrementar");
         // button_decrementar.onclick = function () {
         //     if (parseInt(botellas) <= 1) {
