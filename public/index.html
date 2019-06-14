@@ -20,7 +20,7 @@
 <body style="background-color: #024995;">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-trans">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#page1">
             <img src="./static/images/logo-reciclads.png" id="navbar_logo" width="80" height="30" class="d-inline-block align-top">
         </a>
     </nav>
@@ -101,10 +101,8 @@
 
                 <!-- Información de Cupones -->
                 <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
-                    <div class="col-md-6">
-                        <img src="./static/images/iphonex.png" width="50%" style="margin-left:10rem;" />
-                    </div>
-                    <div class="col-md-6">
+                    
+                    <div class="text-center">
                         <div id="qrcode"></div>
                     </div>
                 </div>
@@ -160,18 +158,20 @@
         var botellas = 0;
         var socket = io.connect('http://localhost:3000');
         var qrcode =  new QRCode("qrcode");
-        var hashids = new Hashids("cwejjwevfewiufghewoeofhweco");
+        var hashids = new Hashids("cwejjwevfewiufghewoeofhweco", 20);
         var uuid = createUUID();
+        var date = new Date();
+        var m = Number(Math.floor(Math.random() * 0x1000), 1000);
 
         function createUUID() {
             var s = [];
             var intDigits = "0123456789";
-            for (var i = 0; i < 36; i++) {
+            for (var i = 0; i < 20; i++) {
                 s[i] = intDigits.substr(Math.floor(Math.random() * 0x10), 1);
             }
             s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
             s[19] = intDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
-            return Number(s.join(""));
+            return parseInt(s.join(""));
         }
 
       const incrementar = function () {                                                                          // Si hace click en incrementar.
@@ -214,9 +214,10 @@
 
 
         const codeGen =  () => {
-            var code = hashids.encode(botellas, Date.now() , uuid, createUUID());
+            var code = hashids.encode([botellas, date.getFullYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), m, uuid, createUUID()]);
             console.log(botellas);
             console.log(code);
+            console.log(hashids.decode(code));
             qrcode.makeCode(code);
         }
   /*       const hashGen = function () {
@@ -233,7 +234,6 @@
             location.href='#page1/slide1';
         }
 
-        console.log(code);
 
 
 
