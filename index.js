@@ -16,11 +16,11 @@ app.get('/test', function (req, res) {
 
 app.use(express.static('public'));
 
-const sport = new SerialPort('COM4', () => {
-  console.log('SerialPort Opened');
+const sport = new SerialPort('/dev/ttyACM0', () => {
+  console.log('SerialPort Opened'); 
 });
 
-var connectedSocket = null;
+let connectedSocket = null;
 function onConnection(socket){
     connectedSocket = socket;
 }

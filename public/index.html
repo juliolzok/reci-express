@@ -43,8 +43,8 @@
                 <br><br><br><br><br><br><br><br><br><br><br><br>
                 <div class="row justify-content-center">
 
-                    <div class="col-md-3">
-                         <a class="btn btn-lg btn-block btn-success text-white"  id="xy" href="#page1/slide2">Comencemos a reciclar!</a>
+                    <div class="col-md-12 text-center">
+                         <h1 class="text-green" style="color: greenyellow"  id="xy" href="#page1/slide2">PRESIONA EL BOTON PARA COMENZAR >>>>>>>></h1>
                     </div>
                 </div>
             </div>
@@ -56,8 +56,7 @@
                 </div>
 
                 <div class="row mt-4 ml-5 justify-content-center">
-                    <h3 style="font-family:'Nilland';">Por favor inserte sus botellas por abajo de la máquina. Una vez que termine,
-                        presione continuar.</h3>
+                    <h3 style="font-family:'Nilland';">Por favor inserte sus botellas en la máquina</h3>
                 </div>
 
                 <div class="row justify-content-center mt-5 mb-5">
@@ -79,15 +78,8 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-md-3">
-                        <a class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1">Atrás</a>
-                    </div>
-                    <div class="col-md-3">
-
-                        <!-- <form action="hashGen()"  method="GET" enctype="multipart/form-data"> -->
-                            <input type="text" id="input_botellas" name="botellas" value="0" hidden>
-                            <button class="btn btn-lg btn-block btn-success text-white"  type="submit" href="page1/slide3"  onclick="verifyMethod()" id="submit_botellas">Continuar</button>
-                        <!-- </form> -->
+                    <div class="col-md-12 text-center">
+                        <h1 class="text-green" style="color: greenyellow"  id="xy" >PRESIONA EL BOTON PARA CONTINUAR >>>>>>>></h1>
                     </div>
                 </div>
             </div>
@@ -112,8 +104,8 @@
                 <!-- Botones -->
                 <!-- style="position:fixed;bottom:20px;left:3500px;" -->
                 <div class="row ml-5 justify-content-center">
-                    <div class="col-md-3">
-                        <button class="btn btn-lg btn-block btn-primary text-blue" href="#page1/slide1" onclick="clearAll()"  >Listo</button>
+                    <div class="col-md-12 text-center">
+                        <h1 class="text-green" style="color: greenyellow"  id="xy" >PRESIONA EL BOTON PARA TERMINAR >>>>>>>></h1>
                     </div>
                 </div>
 
@@ -154,7 +146,7 @@
     <script>
         //document.getElementById("submit_botellas").disabled = true;
         var contador_botellas = document.getElementById("botellas");
-        var input_botellas = document.getElementById("input_botellas").value;
+        //var input_botellas = document.getElementById("input_botellas").value;
         var botellas = 0;
         var socket = io.connect('http://localhost:3000');
         var qrcode =  new QRCode("qrcode");
@@ -192,23 +184,53 @@
             socket.on('data', function(message) {
                 data = Number(message.data);
                 console.log(data);
-                if (data === 48) {
-                incrementar();
-                document.getElementById("submit_botellas").disabled = false;
-            }
+                switch (data){
+                    case 48:
+                        incrementar();
+                        document.getElementById("submit_botellas").disabled = false;
+                        break;
+                    case 49:
+                        document.getElementById("submit_botellas").disabled = true;
+                        break;
+                    case 50:
+                        slideShow();
+                        break;                    
+                    default:
+                        break;
+
+                }
     });
+
+        slideShow = function (){
+            switch (location.href){
+                case 'http://localhost:3000/#page1/slide1':
+                case 'http://localhost:3000/':
+                case 'http://localhost:3000/#page1':
+                    location.href = '#page1/slide2'
+                    break;
+                case 'http://localhost:3000/#page1/slide2':
+                    verifyMethod();
+                    break;
+                case 'http://localhost:3000/#page1/slide3':
+                    clearAll();
+                    break;
+                default:
+                    break;
+            }
+        }    
 
         verifyMethod = function () {
 
-             if (parseInt(botellas) < 1) {
+                    if (parseInt(botellas) < 1) {
                         $('#exampleModal2').modal('show');
-                        document.getElementById("submit_botellas").disabled = true;
                     }
                     else {
                         input_botellas = botellas;
                         codeGen();
                         location.href='#page1/slide3';
                      }
+                       
+
         }
 
 
