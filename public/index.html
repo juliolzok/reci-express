@@ -93,8 +93,8 @@
 
                 <!-- Información de Cupones -->
                 <div class="row ml-4 justify-content-center" style="margin-bottom:20px;">
-                    
-                    <div class="text-center">
+
+                    <div class="text-center" style="background: #ffff; padding:10px">
                         <div id="qrcode"></div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                 <!-- style="position:fixed;bottom:20px;left:3500px;" -->
                 <div class="row ml-5 justify-content-center">
                     <div class="col-md-12 text-center">
-                        <h1 class="text-green" style="color: greenyellow"  id="xy" >PRESIONA EL BOTON PARA TERMINAR >>>>>>>></h1>
+                        <h1 class="text-green " style="color: greenyellow"  id="xy" >PRESIONA EL BOTON PARA TERMINAR >>>>>>>></h1>
                     </div>
                 </div>
 
@@ -194,7 +194,7 @@
                         break;
                     case 50:
                         slideShow();
-                        break;                    
+                        break;
                     default:
                         break;
 
@@ -217,7 +217,7 @@
                 default:
                     break;
             }
-        }    
+        }
 
         verifyMethod = function () {
 
@@ -229,7 +229,7 @@
                         codeGen();
                         location.href='#page1/slide3';
                      }
-                       
+
 
         }
 
@@ -239,15 +239,9 @@
             var code = hashids.encode([botellas, date.getFullYear(), date.getMonth(), date.getDay(), date.getHours(), date.getMinutes(), m, uuid, createUUID()]);
             console.log(botellas);
             console.log(code);
-            console.log(hashids.decode(code));
             qrcode.makeCode(code);
         }
-  /*       const hashGen = function () {
-            var code = hashids.encode();
-            console.log(code)
-            codeGen(code)
-            return code;
-        } */
+
         const clearAll =  () => {
             qrcode.clear();
             input_botellas = 0;
