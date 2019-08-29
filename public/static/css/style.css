@@ -1,6 +1,11 @@
+@font-face {
+    font-family: Uomo-Bold;
+    src: url('../fonts/uomo/Uomo\ Bold.otf'); 
+  }
+
 body {
     background-color: #024995;
-    font-family: Nilland;
+    font-family: Uomo-Bold;
 }
 
 .card{

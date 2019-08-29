@@ -16,7 +16,7 @@ app.get('/test', function (req, res) {
 
 app.use(express.static('public'));
 
-const sport = new SerialPort('/dev/ttyACM0', () => {
+const sport = new SerialPort('COM5', () => {
   console.log('SerialPort Opened'); 
 });
 
